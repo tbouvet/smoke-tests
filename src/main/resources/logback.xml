@@ -2,7 +2,10 @@
 <configuration>
     <include resource="org/seedstack/seed/core/logging/logback-defaults.xml"/>
 
-    <root level="INFO">
+    <!-- LEVEL CAN NOT BE DEBUG -->
+    <logger name="org.apache" level="INFO"></logger>
+
+    <root level="DEBUG">
         <!-- Switch to STDOUT if color output is not supported -->
         <appender-ref ref="STDOUT" />
     </root>

@@ -12,6 +12,8 @@
  */
 package org.seedstack.tests.domains;
 
+import javax.inject.Inject;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,40 +21,41 @@ import org.seedstack.business.api.domain.Factory;
 import org.seedstack.business.api.domain.Repository;
 import org.seedstack.seed.core.api.Logging;
 import org.seedstack.seed.it.SeedITRunner;
+import org.seedstack.seed.persistence.jpa.api.Jpa;
 import org.seedstack.seed.persistence.jpa.api.JpaUnit;
 import org.seedstack.seed.transaction.api.Transactional;
 import org.seedstack.tests.domains.client.Client;
-import org.seedstack.tests.domains.product.Product;
 import org.slf4j.Logger;
-
-import javax.inject.Inject;
 
 @RunWith(SeedITRunner.class)
 public class ClientJpaRepositoryIT {
-    @Inject
-    private Repository<Client, Long> clientRepository;
-    @Inject
-    private Factory<Client> clientFactory;
+	@Jpa
+	@Inject
+	private Repository<Client, Long> clientRepository;
+	@Inject
+	private Factory<Client> clientFactory;
 
-    @Logging
-    private static Logger logger;
+	@Logging
+	private static Logger logger;
 
-    private Client createClient() {
-        final long id = 1L;
-        Client client = clientFactory.create(id);
-        Assertions.assertThat(client.getEntityId()).isEqualTo(id);
-        clientRepository.persist(client);;
-        Assertions.assertThat(client.getEntityId()).isEqualTo(id);
-        return client;
-    }
+	private Client createClient() {
+		final long id = 1L;
+		Client client = clientFactory.create(id);
+		Assertions.assertThat(client.getEntityId()).isEqualTo(id);
+		clientRepository.persist(client);
+		;
+		Assertions.assertThat(client.getEntityId()).isEqualTo(id);
+		return client;
+	}
 
-    @Test
-    @Transactional
-    @JpaUnit("client-domain")
-    public void checkProductResource() {
-        Client client = createClient();
-        clientRepository.delete(client);;
-        client = clientRepository.load(client.getEntityId());
-        Assertions.assertThat(client).isNull();
-    }
+	@Test
+	@Transactional
+	@JpaUnit("smoke-domain")
+	public void checkProductResource() {
+		Client client = createClient();
+		clientRepository.delete(client);
+
+		client = clientRepository.load(client.getEntityId());
+		Assertions.assertThat(client).isNull();
+	}
 }

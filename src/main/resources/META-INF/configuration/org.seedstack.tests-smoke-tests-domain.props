@@ -1,20 +1,22 @@
 [org.seedstack.seed.persistence]
-jpa.units = product-domain, client-domain
-jdbc.datasources = client-ds
+jpa.units = product-domain, smoke-domain
+jdbc.datasources = smoke-ds
 
-[org.seedstack.seed.persistence.jdbc.datasource.client-ds]
+[org.seedstack.seed.persistence.jdbc.datasource.smoke-ds]
 driver = org.hsqldb.jdbcDriver
 url = jdbc:hsqldb:mem:test
 user = sa
 password =
 property.sql.enforce_strict_size = true
 
-# Configure the client JPA unit
-[org.seedstack.seed.persistence.jpa.unit.client-domain]
-datasource = client-ds
+# Configure the smoke tests JPA unit
+[org.seedstack.seed.persistence.jpa.unit.smoke-domain]
+datasource = smoke-ds
 property.hibernate.dialect = org.hibernate.dialect.HSQLDialect
 property.hibernate.hbm2ddl.auto = update
 
 [org.seedstack.tests.domains.client.*]
-jpa-unit = client-domain
+jpa-unit = smoke-domain
 
+[org.seedstack.tests.domains.jms.*]
+jpa-unit = smoke-domain

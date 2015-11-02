@@ -19,50 +19,54 @@ import org.seedstack.tests.domains.product.Product;
 
 /**
  * REST Resource to create and load a {@link Client}.
+ * 
  * @author thierry.bouvet@mpsa.com
  */
 @Path("client")
 public class ClientResource {
 
-    @Jpa
-    @Inject
-    Repository<Client, Long> repository;
-    
-    @Inject
-    Factory<Client> factory;
+	@Jpa
+	@Inject
+	Repository<Client, Long> repository;
 
-    @Inject
-    FluentAssembler fluentAssembler ;
-    
-    /**
-     * Initialize products.
-     * @return String content
-     */
-    @GET
-    @Path("init")
-    @Transactional
-    @JpaUnit("client-domain")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String init() {
-        final Long clients = 10L;
-        for (Long i = 0L; i < clients; i++) {
-            repository.persist(factory.create(i));
-        }
-        return "Clients created";
-    }
-    
-    /**
-     * Load a product.
-     * @param id the {@link Product} id to load.
-     * @return the {@link ClientRepresentation} loaded.
-     */
-    @GET
-    @Path("load/{id}")
-    @Transactional
-    @JpaUnit("client-domain")
-    @Produces(MediaType.APPLICATION_JSON)
-    public ClientRepresentation load(@PathParam("id") Long id) {
-        return fluentAssembler.assemble(repository.load(id)).with(ModelMapper.class).to(ClientRepresentation.class);
-    }
+	@Inject
+	Factory<Client> factory;
+
+	@Inject
+	FluentAssembler fluentAssembler;
+
+	/**
+	 * Initialize products.
+	 * 
+	 * @return String content
+	 */
+	@GET
+	@Path("init")
+	@Transactional
+	@JpaUnit("smoke-domain")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String init() {
+		final Long clients = 10L;
+		for (Long i = 0L; i < clients; i++) {
+			repository.persist(factory.create(i));
+		}
+		return "Clients created";
+	}
+
+	/**
+	 * Load a product.
+	 * 
+	 * @param id
+	 *            the {@link Product} id to load.
+	 * @return the {@link ClientRepresentation} loaded.
+	 */
+	@GET
+	@Path("load/{id}")
+	@Transactional
+	@JpaUnit("smoke-domain")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ClientRepresentation load(@PathParam("id") Long id) {
+		return fluentAssembler.assemble(repository.load(id)).with(ModelMapper.class).to(ClientRepresentation.class);
+	}
 
 }

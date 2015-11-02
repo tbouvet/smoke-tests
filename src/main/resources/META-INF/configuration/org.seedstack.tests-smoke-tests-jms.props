@@ -1,0 +1,20 @@
+[org.seedstack.seed.jms]
+connection-factories = connection-factory-1
+connections = connection-1, connection-2
+
+[org.seedstack.seed.jms.connection-factory.connection-factory-1]
+vendor.class = org.apache.activemq.ActiveMQConnectionFactory
+vendor.property.brokerURL = vm://localhost?broker.persistent=false
+
+[org.seedstack.seed.jms.connection.connection-1]
+connection-factory = connection-factory-1
+managed-connection = false
+
+[org.seedstack.seed.jms.connection.connection-2]
+connection-factory = connection-factory-1
+managed-connection = false
+
+[]
+
+queue1.name = queue1
+topic1.name = topic1

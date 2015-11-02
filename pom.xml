@@ -90,7 +90,28 @@
         </dependencies>
     </dependencyManagement>
 
-    <dependencies>
+	<dependencies>
+        <!-- JMS -->
+        <dependency>
+            <groupId>org.seedstack.seed</groupId>
+            <artifactId>seed-jms-support-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.jms</groupId>
+            <artifactId>jms</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-core</artifactId>
+            <version>5.7.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency> 
         <!-- JPA -->
         <dependency>
             <groupId>org.hibernate</groupId>
