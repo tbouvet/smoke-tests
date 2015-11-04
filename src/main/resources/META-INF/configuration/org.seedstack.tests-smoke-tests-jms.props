@@ -8,13 +8,10 @@ vendor.property.brokerURL = vm://localhost?broker.persistent=false
 
 [org.seedstack.seed.jms.connection.connection-1]
 connection-factory = connection-factory-1
-managed-connection = false
 
 [org.seedstack.seed.jms.connection.connection-2]
 connection-factory = connection-factory-1
-managed-connection = false
 
 []
 
 queue1.name = queue1
-topic1.name = topic1

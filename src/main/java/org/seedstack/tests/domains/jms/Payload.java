@@ -5,39 +5,45 @@ import javax.persistence.Id;
 
 import org.seedstack.business.api.domain.BaseAggregateRoot;
 
+/**
+ * Payload used for JMS communication.
+ * 
+ * @author thierry.bouvet
+ *
+ */
 @Entity
 public class Payload extends BaseAggregateRoot<Long> {
 
-	@Id
-	private Long id;
+    @Id
+    private Long id;
 
-	private String detail;
+    private String detail;
 
-	protected Payload() {
-	}
+    protected Payload() {
+    }
 
-	public Payload(Long id) {
-		super();
-		this.id = id;
-	}
+    public Payload(Long id) {
+        super();
+        this.id = id;
+    }
 
-	public Payload(Long id, String detail) {
-		super();
-		this.id = id;
-		this.detail = detail;
-	}
+    public Payload(Long id, String detail) {
+        super();
+        this.id = id;
+        this.detail = detail;
+    }
 
-	@Override
-	public Long getEntityId() {
-		return this.id;
-	}
+    @Override
+    public Long getEntityId() {
+        return this.id;
+    }
 
-	public String getDetail() {
-		return detail;
-	}
+    public String getDetail() {
+        return detail;
+    }
 
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
 
 }

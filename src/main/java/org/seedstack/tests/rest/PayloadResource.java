@@ -13,39 +13,38 @@ import org.seedstack.business.api.interfaces.assembler.ModelMapper;
 import org.seedstack.seed.persistence.jpa.api.Jpa;
 import org.seedstack.seed.persistence.jpa.api.JpaUnit;
 import org.seedstack.seed.transaction.api.Transactional;
-import org.seedstack.tests.domains.client.Client;
 import org.seedstack.tests.domains.jms.Payload;
 import org.seedstack.tests.jms.PayloadRepresentation;
 
 /**
- * REST Resource to create and load a {@link Client}.
+ * REST Resource to create and load a {@link Payload}. Used by JMS test.
  * 
  * @author thierry.bouvet@mpsa.com
  */
 @Path("payload")
 public class PayloadResource {
 
-	@Jpa
-	@Inject
-	Repository<Payload, Long> repository;
+    @Jpa
+    @Inject
+    Repository<Payload, Long> repository;
 
-	@Inject
-	FluentAssembler fluentAssembler;
+    @Inject
+    FluentAssembler fluentAssembler;
 
-	/**
-	 * Load a payload.
-	 * 
-	 * @param id
-	 *            the {@link Payload} id to load.
-	 * @return the {@link PayloadRepresentation} loaded.
-	 */
-	@GET
-	@Path("load/{id}")
-	@Transactional
-	@JpaUnit("jms-domain")
-	@Produces(MediaType.APPLICATION_JSON)
-	public PayloadRepresentation load(@PathParam("id") Long id) {
-		return fluentAssembler.assemble(repository.load(id)).with(ModelMapper.class).to(PayloadRepresentation.class);
-	}
+    /**
+     * Load a payload.
+     * 
+     * @param id
+     *            the {@link Payload} id to load.
+     * @return the {@link PayloadRepresentation} loaded.
+     */
+    @GET
+    @Path("load/{id}")
+    @Transactional
+    @JpaUnit("smoke-domain")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PayloadRepresentation load(@PathParam("id") Long id) {
+        return fluentAssembler.assemble(repository.load(id)).with(ModelMapper.class).to(PayloadRepresentation.class);
+    }
 
 }
