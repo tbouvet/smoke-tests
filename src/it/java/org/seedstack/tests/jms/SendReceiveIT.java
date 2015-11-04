@@ -42,10 +42,8 @@ public class SendReceiveIT {
      */
     @Test
     public void test() throws Exception {
-        // Integer port = Integer.valueOf(System.getProperty("docker.port"));
-        // String hostname = System.getProperty("docker.host");
-        Integer port = 8080;
-        String hostname = "localhost";
+        Integer port = Integer.valueOf(System.getProperty("docker.port"));
+        String hostname = System.getProperty("docker.host");
         String uri = "http://" + hostname + ":" + port + "/smoke-tests/rest";
         sendMessage(uri);
 

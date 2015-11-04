@@ -26,53 +26,51 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class ClientResourceIT {
 
-	/**
-	 * Check {@link org.seedstack.tests.rest.ClientResource} functionalities.
-	 * 
-	 * @throws Exception
-	 *             if an error occurred
-	 */
-	@Test
-	public void testClientResource() throws Exception {
-		// Integer port = Integer.valueOf(System.getProperty("docker.port"));
-		// String hostname = System.getProperty("docker.host");
-		// String uri = "http://" + hostname + ":" + port +
-		// "/smoke-tests/rest/client";
-		String uri = "http://localhost:8080/smoke-tests/rest/client";
-		createClients(uri);
+    /**
+     * Check {@link org.seedstack.tests.rest.ClientResource} functionalities.
+     * 
+     * @throws Exception
+     *             if an error occurred
+     */
+    @Test
+    public void testClientResource() throws Exception {
+        Integer port = Integer.valueOf(System.getProperty("docker.port"));
+        String hostname = System.getProperty("docker.host");
+        String uri = "http://" + hostname + ":" + port + "/smoke-tests/rest/client";
+        createClients(uri);
 
-		loadClient(uri);
+        loadClient(uri);
 
-	}
+    }
 
-	private void loadClient(String uri) throws Exception {
-		final Long id = 1L;
-		String loadURI = uri + "/load/" + id;
-		HttpUriRequest request = new HttpGet(loadURI);
-		HttpResponse response = HttpClientBuilder.create().build().execute(request);
-		Assertions.assertThat(response.getStatusLine().getStatusCode()).isEqualTo(HttpStatus.SC_OK);
-		Assertions.assertThat(ContentType.getOrDefault(response.getEntity()).getMimeType())
-		        .isEqualTo(MediaType.APPLICATION_JSON);
+    private void loadClient(String uri) throws Exception {
+        final Long id = 1L;
+        String loadURI = uri + "/load/" + id;
+        HttpUriRequest request = new HttpGet(loadURI);
+        HttpResponse response = HttpClientBuilder.create().build().execute(request);
+        Assertions.assertThat(response.getStatusLine().getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+        Assertions.assertThat(ContentType.getOrDefault(response.getEntity()).getMimeType())
+                .isEqualTo(MediaType.APPLICATION_JSON);
 
-		ObjectMapper mapper = new ObjectMapper();
-		ClientRepresentation clientRepresentation = mapper.readValue(EntityUtils.toString(response.getEntity()),
-		        ClientRepresentation.class);
-		Assertions.assertThat(clientRepresentation.getId()).isEqualTo(id);
-	}
+        ObjectMapper mapper = new ObjectMapper();
+        ClientRepresentation clientRepresentation = mapper.readValue(EntityUtils.toString(response.getEntity()),
+                ClientRepresentation.class);
+        Assertions.assertThat(clientRepresentation.getId()).isEqualTo(id);
+    }
 
-	private void createClients(String uri) throws Exception {
-		String initURI = uri + "/init";
-		HttpUriRequest request = new HttpGet(initURI);
+    private void createClients(String uri) throws Exception {
+        String initURI = uri + "/init";
+        HttpUriRequest request = new HttpGet(initURI);
 
-		HttpResponse response = HttpClientBuilder.create().build().execute(request);
+        HttpResponse response = HttpClientBuilder.create().build().execute(request);
 
-		Assertions.assertThat(response.getStatusLine().getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+        Assertions.assertThat(response.getStatusLine().getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 
-		Assertions.assertThat(ContentType.getOrDefault(response.getEntity()).getMimeType())
-		        .isEqualTo(MediaType.TEXT_PLAIN);
+        Assertions.assertThat(ContentType.getOrDefault(response.getEntity()).getMimeType())
+                .isEqualTo(MediaType.TEXT_PLAIN);
 
-		final String textFromResponse = "Clients created";
-		Assertions.assertThat(EntityUtils.toString(response.getEntity())).isEqualTo(textFromResponse);
-	}
+        final String textFromResponse = "Clients created";
+        Assertions.assertThat(EntityUtils.toString(response.getEntity())).isEqualTo(textFromResponse);
+    }
 
 }
