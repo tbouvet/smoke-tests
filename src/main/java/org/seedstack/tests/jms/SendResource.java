@@ -11,8 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.seedstack.jms.JmsConnection;
 import org.seedstack.seed.core.api.Configuration;
-import org.seedstack.seed.jms.api.JmsConnection;
 import org.seedstack.seed.transaction.api.Transactional;
 import org.seedstack.tests.domains.jms.Payload;
 
