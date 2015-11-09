@@ -232,7 +232,7 @@
                     <plugin>
                         <groupId>org.jolokia</groupId>
                         <artifactId>docker-maven-plugin</artifactId>
-                        <version> 0.13.3</version>
+                        <version> 0.13.6</version>
                         <configuration>
                             <dockerHost>tcp://${docker.host}:2376</dockerHost>
                             <certPath>${docker.certPath}</certPath>
