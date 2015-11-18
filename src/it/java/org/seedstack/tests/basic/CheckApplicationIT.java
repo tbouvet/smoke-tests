@@ -31,15 +31,16 @@ public class CheckApplicationIT {
     public void testHelloResource() throws Exception {
         Integer port = Integer.valueOf(System.getProperty("docker.port"));
         String hostname = System.getProperty("docker.host");
-        String uri = "http://"+hostname+":" + port + "/smoke-tests/rest/hello";
+        String uri = "http://" + hostname + ":" + port + "/smoke-tests/hello";
         HttpUriRequest request = new HttpGet(uri);
 
         HttpResponse response = HttpClientBuilder.create().build().execute(request);
 
         Assertions.assertThat(response.getStatusLine().getStatusCode()).isEqualTo(HttpStatus.SC_OK);
-        
-        Assertions.assertThat(ContentType.getOrDefault(response.getEntity()).getMimeType()).isEqualTo(MediaType.TEXT_PLAIN);
-        
+
+        Assertions.assertThat(ContentType.getOrDefault(response.getEntity()).getMimeType())
+                .isEqualTo(MediaType.TEXT_PLAIN);
+
         final String textFromResponse = "hello";
         Assertions.assertThat(EntityUtils.toString(response.getEntity())).isEqualTo(textFromResponse);
     }

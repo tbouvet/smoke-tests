@@ -36,7 +36,7 @@ public class ClientResourceIT {
     public void testClientResource() throws Exception {
         Integer port = Integer.valueOf(System.getProperty("docker.port"));
         String hostname = System.getProperty("docker.host");
-        String uri = "http://" + hostname + ":" + port + "/smoke-tests/rest/client";
+        String uri = "http://" + hostname + ":" + port + "/smoke-tests/client";
         createClients(uri);
 
         loadClient(uri);

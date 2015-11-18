@@ -12,8 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.seedstack.jms.JmsConnection;
-import org.seedstack.seed.core.api.Configuration;
-import org.seedstack.seed.transaction.api.Transactional;
+import org.seedstack.seed.Configuration;
+import org.seedstack.seed.transaction.Transactional;
 import org.seedstack.tests.domains.jms.Payload;
 
 import com.fasterxml.jackson.databind.ObjectMapper;

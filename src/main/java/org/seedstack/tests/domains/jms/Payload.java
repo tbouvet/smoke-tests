@@ -3,7 +3,7 @@ package org.seedstack.tests.domains.jms;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import org.seedstack.business.api.domain.BaseAggregateRoot;
+import org.seedstack.business.domain.BaseAggregateRoot;
 
 /**
  * Payload used for JMS communication.

@@ -27,46 +27,50 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class ProductResourceIT {
 
-    
     /**
      * Check {@link ProductResource} functionalities.
-     * @throws Exception if an error occurred
+     * 
+     * @throws Exception
+     *             if an error occurred
      */
     @Test
     public void testProductResource() throws Exception {
         Integer port = Integer.valueOf(System.getProperty("docker.port"));
         String hostname = System.getProperty("docker.host");
-        String uri = "http://"+hostname+":" + port + "/smoke-tests/rest/product";
-        
+        String uri = "http://" + hostname + ":" + port + "/smoke-tests/product";
+
         createProducts(uri);
-        
+
         loadProduct(uri);
 
     }
 
     private void loadProduct(String uri) throws Exception {
-        final Long id=1L;
-        String loadURI = uri+"/load/"+id;
+        final Long id = 1L;
+        String loadURI = uri + "/load/" + id;
         HttpUriRequest request = new HttpGet(loadURI);
         HttpResponse response = HttpClientBuilder.create().build().execute(request);
         Assertions.assertThat(response.getStatusLine().getStatusCode()).isEqualTo(HttpStatus.SC_OK);
-        Assertions.assertThat(ContentType.getOrDefault(response.getEntity()).getMimeType()).isEqualTo(MediaType.APPLICATION_JSON);
-        
+        Assertions.assertThat(ContentType.getOrDefault(response.getEntity()).getMimeType())
+                .isEqualTo(MediaType.APPLICATION_JSON);
+
         ObjectMapper mapper = new ObjectMapper();
-        ProductRepresentation productRepresentation = mapper.readValue(EntityUtils.toString(response.getEntity()),ProductRepresentation.class);
+        ProductRepresentation productRepresentation = mapper.readValue(EntityUtils.toString(response.getEntity()),
+                ProductRepresentation.class);
         Assertions.assertThat(productRepresentation.getId()).isEqualTo(id);
     }
 
     private void createProducts(String uri) throws Exception {
-        String initURI = uri+"/init";
+        String initURI = uri + "/init";
         HttpUriRequest request = new HttpGet(initURI);
 
         HttpResponse response = HttpClientBuilder.create().build().execute(request);
 
         Assertions.assertThat(response.getStatusLine().getStatusCode()).isEqualTo(HttpStatus.SC_OK);
-        
-        Assertions.assertThat(ContentType.getOrDefault(response.getEntity()).getMimeType()).isEqualTo(MediaType.TEXT_PLAIN);
-        
+
+        Assertions.assertThat(ContentType.getOrDefault(response.getEntity()).getMimeType())
+                .isEqualTo(MediaType.TEXT_PLAIN);
+
         final String textFromResponse = "Products created";
         Assertions.assertThat(EntityUtils.toString(response.getEntity())).isEqualTo(textFromResponse);
     }

@@ -7,13 +7,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.seedstack.business.api.domain.Factory;
-import org.seedstack.business.api.domain.Repository;
-import org.seedstack.business.api.interfaces.assembler.FluentAssembler;
-import org.seedstack.business.api.interfaces.assembler.ModelMapper;
-import org.seedstack.seed.persistence.jpa.api.Jpa;
-import org.seedstack.seed.persistence.jpa.api.JpaUnit;
-import org.seedstack.seed.transaction.api.Transactional;
+import org.seedstack.business.domain.Factory;
+import org.seedstack.business.domain.Repository;
+import org.seedstack.business.assembler.FluentAssembler;
+import org.seedstack.business.assembler.ModelMapper;
+import org.seedstack.jpa.Jpa;
+import org.seedstack.jpa.JpaUnit;
+import org.seedstack.seed.transaction.Transactional;
 import org.seedstack.tests.domains.client.Client;
 import org.seedstack.tests.domains.product.Product;
 

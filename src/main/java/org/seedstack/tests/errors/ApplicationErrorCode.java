@@ -1,6 +1,6 @@
 package org.seedstack.tests.errors;
 
-import org.seedstack.seed.core.api.ErrorCode;
+import org.seedstack.seed.ErrorCode;
 
 public enum ApplicationErrorCode implements ErrorCode {
 

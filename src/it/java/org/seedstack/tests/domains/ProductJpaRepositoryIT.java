@@ -17,12 +17,12 @@ import javax.inject.Inject;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.seedstack.business.api.domain.Factory;
-import org.seedstack.business.api.domain.Repository;
-import org.seedstack.seed.core.api.Logging;
+import org.seedstack.business.domain.Factory;
+import org.seedstack.business.domain.Repository;
+import org.seedstack.seed.Logging;
 import org.seedstack.seed.it.SeedITRunner;
-import org.seedstack.seed.persistence.jpa.api.JpaUnit;
-import org.seedstack.seed.transaction.api.Transactional;
+import org.seedstack.jpa.JpaUnit;
+import org.seedstack.seed.transaction.Transactional;
 import org.seedstack.tests.domains.product.Product;
 import org.slf4j.Logger;
 

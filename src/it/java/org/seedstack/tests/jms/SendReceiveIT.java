@@ -44,7 +44,7 @@ public class SendReceiveIT {
     public void test() throws Exception {
         Integer port = Integer.valueOf(System.getProperty("docker.port"));
         String hostname = System.getProperty("docker.host");
-        String uri = "http://" + hostname + ":" + port + "/smoke-tests/rest";
+        String uri = "http://" + hostname + ":" + port + "/smoke-tests";
         sendMessage(uri);
 
         checkPayload(uri);

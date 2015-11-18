@@ -1,15 +1,15 @@
-[org.seedstack.seed.jms]
+[org.seedstack.jms]
 connection-factories = connection-factory-1
 connections = connection-1, connection-2
 
-[org.seedstack.seed.jms.connection-factory.connection-factory-1]
+[org.seedstack.jms.connection-factory.connection-factory-1]
 vendor.class = org.apache.activemq.ActiveMQConnectionFactory
 vendor.property.brokerURL = vm://localhost?broker.persistent=false
 
-[org.seedstack.seed.jms.connection.connection-1]
+[org.seedstack.jms.connection.connection-1]
 connection-factory = connection-factory-1
 
-[org.seedstack.seed.jms.connection.connection-2]
+[org.seedstack.jms.connection.connection-2]
 connection-factory = connection-factory-1
 
 []
